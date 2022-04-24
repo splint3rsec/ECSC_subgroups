@@ -3,3 +3,6 @@ This repository is for providing the ECSC (ELTE CyberSecurity Club) subgroups ch
 
 # Categories
 The initial categories of the subgroups are **Web, Cryptography** and **Networking.**
+
+# Flag format
+The flage is wrapped inside ECSC{}.
