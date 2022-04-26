@@ -1,19 +1,23 @@
-from re import template
-from flask import Flask, request, render_template, render_template_string
+from flask import Flask, request, render_template
+from jinja2 import Environment
+
 
 app = Flask(__name__)
-app.run(debug=True)
+Jinja2 = Environment()
 
 @app.route('/')
 def first():
     return render_template('interface.html')
 
-@app.route('/hidden')
+@app.route('/hidden', methods=['GET'])
 def hidden():
-    # if request.method == 'GET':
-    #     name = request.args.get('query')
-    return render_template('secret.html')
+    input = request.args.get('input')
+    output = Jinja2.from_string('Secret? Maybe: ' + str(input)).render()
+    return render_template('secret.html', output=output)
 
 @app.errorhandler(404)
 def notfound(dir):
     return render_template("notfound.html"), 404
+
+if __name__ == "__main__":
+    app.run(debug=True)
