@@ -9,6 +9,11 @@ Jinja2 = Environment()
 def first():
     return render_template('interface.html')
 
+@app.route('/robots.txt') 
+def content(): 
+	with open('robots.txt', 'r') as f: 
+		return render_template('content.html', text=f.read()) 
+
 @app.route('/hidden', methods=['GET'])
 def hidden():
     input = request.args.get('input')
